@@ -39,7 +39,7 @@ addNewBook = (title, image, id) => {
     bookTitle.innerText = title
     bookImage.src = image
 
-    card.append(bookImage, bookTitle)
+    card.append(bookTitle, bookImage)
     
     bookList.append(card)
 
@@ -121,6 +121,7 @@ const updateBook = async(id,body_params) => {
 
             // What to do after a book is updated
            showBook(id)
+           getData()
            editForm.reset()
         } 
     }
