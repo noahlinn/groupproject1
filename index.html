@@ -6,55 +6,61 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
         <script src="script.js" async defer></script>
     </head>
     <body>
-        <nav>
-        <a href='#' id = "allBooks">All Books</a>
-        <a href='#' id = "createBooks">Create New Book</a>
-    </nav>
-        <div class = 'displayAllBooks'>
-            <h1>All Books</h1>
-            <ol class="listOfBooks">
-            </ol>
+        <div class="container">
+            <nav>
+                <button class='active nav-button' id = "allBooks">All Books</button>
+                <button class='nav-button' id = "createBooks">Create New Book</button>
+            </nav>
+            <div class = 'book-container displayAllBooks'>
+                <h1>All Books</h1>
+                <div class="listOfBooks">
+                </div>
+            </div>
+            <div class = 'book-container bookDetails hidden'>
+                <h1 id = 'details-header'></h1>
+                <h2 id = 'show-name'></h1>
+                <h4 id = 'show-author'></h3>
+                <p id ='show-release-date'></p>
+                <img id = 'show-image' src=''>
+                <button id="delete-book-button">Delete</button>
+                <button id='edit-book-button'>Edit</button>
+            </div>
+            <section id="newBook" class='book-container hidden'>
+                <form id='new-book-form'>
+                  <label for='new-name'>Name:</label>
+                  <input type='text' id='new-name' name='title'>
+                  <label for='new-author'>Author:</label>
+                  <input type='text' id='new-author' name='author'>
+                  <label for='new-release-date'>Release date:</label>
+                  <input type='text' id='new-release-date' name='release_date'>
+                  <label for='new-image'>Cover Image:</label>
+                  <input type='text' id='new-image' name='image'>
+                  <button id='submit-new-book'>Add new book</button>
+                </form>
+            </section>
+            <section id="edit-section" class="book-container hidden">
+                <h1 id='edit-header'></h1>
+                <form id="edit-book-form">
+                  <label for='edit-name'>Name:</label>
+                  <input type='text' id='edit-name' name='title'>
+                  <label for='edit-author'>Author:</label>
+                  <input type='text' id='edit-author' name='author'>
+                  <label for='edit-release-date'>Release date:</label>
+                  <input type='text' id='edit-release-date' name='release_date'>
+                  <label for='edit-image'>Cover Image:</label>
+                  <input type='text' id='edit-image' name='image'>
+                  <button id="submit-edit-book">Update</button>
+                </form>
+            </section>
+
         </div>
-        <div class = 'bookDetails hidden'>
-            <h1 id = 'details-header'></h1>
-            <h2 id = 'show-name'></h1>
-            <h4 id = 'show-author'></h3>
-            <p id ='show-release-date'></p>
-            <img id = 'show-image' src=''>
-            <button id="delete-book-button">Delete</button>
-            <button id='edit-book-button'>Edit</button>
-        </div>
-        <section id="newBook" class='hidden'>
-            <form id='new-book-form'>
-              <label for='new-name'>Name:</label>
-              <input type='text' id='new-name' name='title'>
-              <label for='new-author'>Author:</label>
-              <input type='text' id='new-author' name='author'>
-              <label for='new-release-date'>Release date:</label>
-              <input type='text' id='new-release-date' name='release_date'>
-              <label for='new-image'>Cover Image:</label>
-              <input type='text' id='new-image' name='image'>
-              <button id='submit-new-book'>Add new book</button>
-            </form>
-        </section>
-        <section id="edit-section" class="hidden">
-            <h1 id='edit-header'></h1>
-            <form id="edit-book-form">
-              <label for='edit-name'>Name:</label>
-              <input type='text' id='edit-name' name='title'>
-              <label for='edit-author'>Author:</label>
-              <input type='text' id='edit-author' name='author'>
-              <label for='edit-release-date'>Release date:</label>
-              <input type='text' id='edit-release-date' name='release_date'>
-              <label for='edit-image'>Cover Image:</label>
-              <input type='text' id='edit-image' name='image'>
-              <button id="submit-edit-book">Update</button>
-            </form>
-          </section>
+       
         <div id="alert-message" class="hidden"></div>
     </body>
 </html>
