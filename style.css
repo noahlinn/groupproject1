@@ -1,5 +1,23 @@
+body {
+   margin: 0; 
+   padding: 0;
+   background-color: aliceblue;
+   font-family: 'Roboto', sans-serif;
+   font-size: 16px;
+}
+button {
+    font-family: 'Roboto', sans-serif;
+}
+
 .hidden{
     display:none;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: unset;
 }
 
 
@@ -16,4 +34,51 @@
     text-align: center;
 }
 
+/* Container */
+.container {
+    margin-top: 50px;
+    max-width: 1000px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
 
+.book-container {
+    margin-top: 30px;
+}
+
+/* Buttons */
+.active {
+    background: rgb(197, 222, 253);
+   
+}
+
+.nav-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 155px;
+}
+
+.nav-button:first-child {
+    margin-right: 15px;
+}
+
+/* BookLists */
+.listOfBooks p:hover {
+    cursor: pointer;
+}
+
+
+/* Card */
+.book-card {
+    display: inline-block;
+    margin-right: 30px;
+}
+.book-card img {
+
+    height: 200px;
+    width: 100px;
+    object-fit: cover;
+}

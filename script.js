@@ -23,16 +23,27 @@ const getData = async() =>{
     bookList.innerHTML = ''
     for (let i in data){
         let bookTitle = data[i].title
+        let bookImage = data[i].image
         let bookId = data[i].id
-        addNewBook(bookTitle, bookId)
+        addNewBook(bookTitle,bookImage, bookId)
     }
 }
 
-addNewBook = (title, id) => {
-    let bookTitle = document.createElement('li')
+addNewBook = (title, image, id) => {
+    let card = document.createElement('div')
+    let bookImage = document.createElement('img')
+    let bookTitle = document.createElement('p')
+    
+    card.classList.add('book-card')
 
-    bookTitle.innerHTML = title
-    bookList.append(bookTitle)
+    bookTitle.innerText = title
+    bookImage.src = image
+
+    card.append(bookImage, bookTitle)
+    
+    bookList.append(card)
+
+
     bookTitle.addEventListener('click',() =>{
         showBook(id)
     })
@@ -84,6 +95,8 @@ const showBook = async (id) => {
     document.querySelector('#show-author').innerText = data.author
     document.querySelector('#show-release-date').innerText = data.release_date
     document.querySelector('#show-image').src = data.image
+    newBook.classList.remove('active')
+    allBooks.classList.remove('active')
     bookDetailContainer.classList.remove('hidden')
     deleteBookButton.setAttribute('data-id',id);
     allBooksContainer.classList.add('hidden')
@@ -186,6 +199,8 @@ allBooks.addEventListener('click', () =>{
     allBooksContainer.classList.remove('hidden')
     createBookContainer.classList.add('hidden')
     editSection.classList.add('hidden')
+    allBooks.classList.add('active')
+    newBook.classList.remove('active')
 
     console.log('click')
 })
@@ -196,6 +211,9 @@ newBook.addEventListener('click', () => {
     createBookContainer.classList.remove('hidden')
     submitForm.classList.remove('hidden')
     editSection.classList.add('hidden')
+    newBook.classList.add('active')
+    allBooks.classList.remove('active')
+   
     // console.log(submitForm)
 })
 
