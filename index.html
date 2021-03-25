@@ -12,15 +12,32 @@
     <body>
         <button id = "allBooks">All Books</button>
         <button id = "createBooks">Create New Book</button>
-        <div class = 'onLoad'>
-            <h1>welocme</h1>
-        </div>
-        <div class = 'displayAllBooks hidden'>
+        <div class = 'displayAllBooks'>
             <h1>All Books</h1>
+            <ol class="listOfBooks">
+            </ol>
         </div>
-        
-        <div class = 'displayCreateBooks hidden'>
-            <h1>Create New Book</h1>
+        <div class = 'bookDetails'>
+            <h1 id = 'details-header'></h1>
+            <h2 id = 'show-name'></h1>
+            <h4 id = 'show-author'></h3>
+            <p id ='show-release-date'></p>
+            <img id = 'show-image' src=''>
         </div>
+        <section id="newBook" class='hidden'>
+            <form id='new-book-form'>
+              <label for='new-name'>Name:</label>
+              <input type='text' id='new-name' name='title'>
+              <label for='new-author'>Author:</label>
+              <input type='text' id='new-author' name='author'>
+              <label for='new-release-date'>Release date:</label>
+              <input type='text' id='new-release-date' name='release_date'>
+              <label for='new-image'>Cover Image:</label>
+              <input type='text' id='new-image' name='image'>
+              <button id='submit-new-book'>Add new book</button>
+            </form>
+          </section>
     </body>
 </html>
+
+
