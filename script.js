@@ -9,7 +9,9 @@ const bookList = document.querySelector('.listOfBooks')
 const bookDetailContainer = document.querySelector('.bookDetails')
 const submitForm = document.querySelector('#new-book-form')
 const deleteBookButton = document.getElementById('delete-book-button')
-
+const editBookButton = document.getElementById('edit-book-button')
+const editSection = document.querySelector('#edit-section')
+const editForm = document.querySelector('#edit-book-form')
 
 
 
@@ -85,6 +87,7 @@ const showBook = async (id) => {
     bookDetailContainer.classList.remove('hidden')
     deleteBookButton.setAttribute('data-id',id);
     allBooksContainer.classList.add('hidden')
+    editSection.classList.add('hidden')
 }
 
 const updateBook = async(id,body_params) => {
@@ -102,8 +105,10 @@ const updateBook = async(id,body_params) => {
         }
 
         else if (resp.status === 201) {
+
             // What to do after a book is updated
-           
+           showBook(id)
+           editForm.reset()
         } 
     }
     catch(error) {
@@ -158,11 +163,29 @@ submitForm.addEventListener('submit', event =>{
     createBook(body)
 })
 
+editForm.addEventListener('submit', event => {
+    event.preventDefault()
+    let updateArr = event.target.elements
+    const body = {}
+    for(let i = 0; i<updateArr.length-1; i++){
+  
+
+        if (updateArr[i].value !== "") {
+            const key = updateArr[i].getAttribute('name')
+            body[key] = updateArr[i].value
+        }
+    }
+
+    const bookId = editForm.getAttribute('data-id')
+    console.log(body)
+    updateBook(bookId, body)
+})
 
 allBooks.addEventListener('click', () =>{
     bookDetailContainer.classList.add('hidden')
     allBooksContainer.classList.remove('hidden')
     createBookContainer.classList.add('hidden')
+    editSection.classList.add('hidden')
 
     console.log('click')
 })
@@ -172,6 +195,7 @@ newBook.addEventListener('click', () => {
     bookDetailContainer.classList.add('hidden')
     createBookContainer.classList.remove('hidden')
     submitForm.classList.remove('hidden')
+    editSection.classList.add('hidden')
     // console.log(submitForm)
 })
 
@@ -179,6 +203,17 @@ newBook.addEventListener('click', () => {
 deleteBookButton.addEventListener('click', (event) => {
     const bookId = event.target.getAttribute('data-id')
     deleteBook(bookId);
+    
 })
 
 getData();
+
+editBookButton.addEventListener('click', (event) => {
+   
+    const bookId = deleteBookButton.getAttribute('data-id')
+    editForm.setAttribute('data-id', bookId)
+    bookDetailContainer.classList.add('hidden') 
+    editSection.classList.remove('hidden')
+    let bookName = document.querySelector('#show-name').innerText
+    document.querySelector('#edit-header').innerText = `Edit ${bookName}`
+})

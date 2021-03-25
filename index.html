@@ -10,8 +10,10 @@
         <script src="script.js" async defer></script>
     </head>
     <body>
-        <button id = "allBooks">All Books</button>
-        <button id = "createBooks">Create New Book</button>
+        <nav>
+        <a href='#' id = "allBooks">All Books</a>
+        <a href='#' id = "createBooks">Create New Book</a>
+    </nav>
         <div class = 'displayAllBooks'>
             <h1>All Books</h1>
             <ol class="listOfBooks">
@@ -24,6 +26,7 @@
             <p id ='show-release-date'></p>
             <img id = 'show-image' src=''>
             <button id="delete-book-button">Delete</button>
+            <button id='edit-book-button'>Edit</button>
         </div>
         <section id="newBook" class='hidden'>
             <form id='new-book-form'>
@@ -38,6 +41,20 @@
               <button id='submit-new-book'>Add new book</button>
             </form>
         </section>
+        <section id="edit-section" class="hidden">
+            <h1 id='edit-header'></h1>
+            <form id="edit-book-form">
+              <label for='edit-name'>Name:</label>
+              <input type='text' id='edit-name' name='title'>
+              <label for='edit-author'>Author:</label>
+              <input type='text' id='edit-author' name='author'>
+              <label for='edit-release-date'>Release date:</label>
+              <input type='text' id='edit-release-date' name='release_date'>
+              <label for='edit-image'>Cover Image:</label>
+              <input type='text' id='edit-image' name='image'>
+              <button id="submit-edit-book">Update</button>
+            </form>
+          </section>
         <div id="alert-message" class="hidden"></div>
     </body>
 </html>
