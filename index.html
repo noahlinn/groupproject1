@@ -17,12 +17,13 @@
             <ol class="listOfBooks">
             </ol>
         </div>
-        <div class = 'bookDetails'>
+        <div class = 'bookDetails hidden'>
             <h1 id = 'details-header'></h1>
             <h2 id = 'show-name'></h1>
             <h4 id = 'show-author'></h3>
             <p id ='show-release-date'></p>
             <img id = 'show-image' src=''>
+            <button id="delete-book-button">Delete</button>
         </div>
         <section id="newBook" class='hidden'>
             <form id='new-book-form'>
@@ -36,7 +37,8 @@
               <input type='text' id='new-image' name='image'>
               <button id='submit-new-book'>Add new book</button>
             </form>
-          </section>
+        </section>
+        <div id="alert-message" class="hidden"></div>
     </body>
 </html>
 

@@ -8,6 +8,7 @@ const createBookContainer = document.querySelector('#newBook')
 const bookList = document.querySelector('.listOfBooks')
 const bookDetailContainer = document.querySelector('.bookDetails')
 const submitForm = document.querySelector('#new-book-form')
+const deleteBookButton = document.getElementById('delete-book-button')
 
 
 
@@ -68,7 +69,7 @@ const createBook = async(body_params) => {
         } 
     }
     catch(error) {
-        console.log(error);
+        displayMessage(error);
         return;
     }
 }
@@ -82,10 +83,67 @@ const showBook = async (id) => {
     document.querySelector('#show-release-date').innerText = data.release_date
     document.querySelector('#show-image').src = data.image
     bookDetailContainer.classList.remove('hidden')
+    deleteBookButton.setAttribute('data-id',id);
     allBooksContainer.classList.add('hidden')
 }
 
+const updateBook = async(id,body_params) => {
+    try {
+        const resp = await fetch(`http://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`, 
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body_params),
+            });
+        if (resp.status === 404) {
+            throw new Error('404 error');
+        }
 
+        else if (resp.status === 201) {
+            // What to do after a book is updated
+           
+        } 
+    }
+    catch(error) {
+        displayMessage(error);
+        return;
+    }
+}
+
+const deleteBook = async (bookId) => {
+    try {
+        const res = await fetch(`http://myapi-profstream.herokuapp.com/api/b9c89d/books/${bookId}`, { method: 'DELETE' })
+    
+        if (res.status === 404) {
+            throw new Error('404 error');
+        }
+        else if (res.status === 200) {
+            getData();
+            allBooksContainer.classList.remove('hidden');
+            bookDetailContainer.classList.add('hidden');
+        }
+    }
+    catch(error) {
+        displayMessage(error);
+    }
+   
+     
+}
+
+// Put this in Catch Area of Your Try/Catch.  Shows an error on screen if anything went wrong.
+const displayMessage = (error) => {
+    document.getElementById('alert-message').innerHTML= "";
+    const p = document.createElement('p');
+    p.innerText = error.message;
+    document.getElementById('alert-message').append(p);
+    document.getElementById('alert-message').classList.remove('hidden');
+    
+    setTimeout(()=> {
+        document.getElementById('alert-message').classList.add('hidden');
+    },2000);
+}
 
 submitForm.addEventListener('submit', event =>{
     event.preventDefault()
@@ -116,3 +174,11 @@ newBook.addEventListener('click', () => {
     submitForm.classList.remove('hidden')
     // console.log(submitForm)
 })
+
+// Deletes a book
+deleteBookButton.addEventListener('click', (event) => {
+    const bookId = event.target.getAttribute('data-id')
+    deleteBook(bookId);
+})
+
+getData();

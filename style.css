@@ -1,3 +1,17 @@
 .hidden{
     display:none;
 }
+
+
+/* Alert */
+#alert-message {
+    box-shadow: 2px 1px 1px 1px rgb(201, 201, 201);
+    padding: 10px 20px;
+    position: absolute;
+    top: 0;
+    width: 400px;
+    background: rgb(248, 220, 220);
+    left: 50%;
+    transform: translate(-50%, 0); 
+    text-align: center;
+}
