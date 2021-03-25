@@ -1,7 +1,10 @@
 body {
    margin: 0; 
    padding: 0;
-   background-color: aliceblue;
+   background: url(./bg1.jpeg) no-repeat center center fixed; 
+   background-size: cover;
+   color:white;
+   /* background: url('https://files.slack.com/files-pri/T0351JZQ0-F01SD6KE937/adobestock_180424397.jpeg'); */
    font-family: 'Roboto', sans-serif;
    font-size: 16px;
 }
@@ -69,16 +72,48 @@ p {
 .listOfBooks p:hover {
     cursor: pointer;
 }
+.listOfBooks{
 
+    display: flex;
+    flex-wrap: wrap;
+}
 
+#all-books-header{
+    text-align: center;
+}
+.book-card p{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+}
 /* Card */
 .book-card {
-    display: inline-block;
-    margin-right: 30px;
+    /* color: black; */
+    font-size: 20px;
+
+ 
+
+    text-align: center;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px 15px 20px 15px;
+    /* margin-bottom: 20px; */
+    padding: 5px;
+    border: 2px solid white;
+    box-sizing: border-box;
+
+    /* border:1px solid black; */
+    width: 15%;
+    height: 272px;
+    background-color: rgb(10, 32, 69);
+    /* box-shadow: 2px 1px 1px 2px rgba(255, 255, 255, 0.25); */
+    
 }
 .book-card img {
-
     height: 200px;
-    width: 100px;
+    width: 140px;
     object-fit: cover;
-}
+}   
