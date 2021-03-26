@@ -155,7 +155,9 @@ const deleteBook = async (bookId) => {
 // Check Validation of Form Return true if everything is in th field. False if not
 const checkValidation = submitArr => {
     for (let i = 0; i < submitArr.length-1; i++) {
-        if (submitArr[i].value === '') return false;
+        if (submitArr[i].value === '' && submitArr[i].getAttribute("name") !== 'image') return false;
+        // console.log(submitArr[i].getAttribute("name") !== 'image') 
+
     }
 
     return true;
@@ -202,7 +204,7 @@ submitForm.addEventListener('submit', event =>{
     else {
         let message = ''
         for (let i = 0; i < submitArr.length-1; i++) {
-            if (submitArr[i].value === '') message += `${submitArr[i].getAttribute('name')} is empty \n`
+            if (submitArr[i].value === '' && submitArr[i].getAttribute("name") !== 'image') message += `${submitArr[i].getAttribute('name')} is empty \n`
         }
         displayMessage(message)
     }
