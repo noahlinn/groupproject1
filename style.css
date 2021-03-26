@@ -294,7 +294,7 @@ p {
     }    
     #show-image{
         width:125px;
-        height:160px;
+        height:175px;
     }
     .bookDetails button{
         width: 70px;
@@ -304,4 +304,5 @@ p {
     #details-header{
         font-size: 20px
     }
+
 }
