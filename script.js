@@ -12,12 +12,13 @@ const deleteBookButton = document.getElementById('delete-book-button')
 const editBookButton = document.getElementById('edit-book-button')
 const editSection = document.querySelector('#edit-section')
 const editForm = document.querySelector('#edit-book-form')
+const loader = document.querySelector('.loader')
 
 
 
 //get request
 const getData = async() =>{
-
+    loader.classList.remove('hidden')
     let response = await fetch('https://myapi-profstream.herokuapp.com/api/b9c89d/books')
     let data = await response.json()
     console.log(data)
@@ -28,6 +29,7 @@ const getData = async() =>{
         let bookId = data[i].id
         addNewBook(bookTitle,bookImage, bookId)
     }
+    loader.classList.add('hidden')
 }
 
 addNewBook = (title, image, id) => {
