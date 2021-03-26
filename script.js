@@ -17,7 +17,8 @@ const editForm = document.querySelector('#edit-book-form')
 
 //get request
 const getData = async() =>{
-    let response = await fetch('http://myapi-profstream.herokuapp.com/api/b9c89d/books')
+
+    let response = await fetch('https://myapi-profstream.herokuapp.com/api/b9c89d/books')
     let data = await response.json()
     console.log(data)
     bookList.innerHTML = ''
