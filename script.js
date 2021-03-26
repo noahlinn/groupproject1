@@ -77,7 +77,7 @@ const createBook = async(body_params) => {
             const data = await resp.json()
             console.log(data)
             showBook(data.id)
-            submitForm.classList.add('hidden')
+            createBookContainer.classList.add('hidden')
             submitForm.reset()
             getData()
         } 
