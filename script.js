@@ -57,7 +57,7 @@ addNewBook = (title, image, id) => {
 
 const createBook = async(body_params) => {
     try {
-        const resp = await fetch('http://myapi-profstream.herokuapp.com/api/b9c89d/books', 
+        const resp = await fetch('https://myapi-profstream.herokuapp.com/api/b9c89d/books', 
             {
                 method: 'POST',
                 headers: {
@@ -89,7 +89,7 @@ const createBook = async(body_params) => {
 }
 
 const showBook = async (id) => {
-    const res = await fetch(`http://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`)
+    const res = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`)
     const data = await res.json()
     document.querySelector('#details-header').innerText = `Details for ${data.title}`
     document.querySelector('#show-name').innerText = data.title
@@ -106,7 +106,7 @@ const showBook = async (id) => {
 
 const updateBook = async(id,body_params) => {
     try {
-        const resp = await fetch(`http://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`, 
+        const resp = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`, 
             {
                 method: 'PUT',
                 headers: {
@@ -134,7 +134,7 @@ const updateBook = async(id,body_params) => {
 
 const deleteBook = async (bookId) => {
     try {
-        const res = await fetch(`http://myapi-profstream.herokuapp.com/api/b9c89d/books/${bookId}`, { method: 'DELETE' })
+        const res = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${bookId}`, { method: 'DELETE' })
     
         if (res.status === 404) {
             throw new Error('404 error');
