@@ -58,7 +58,7 @@ p {
    
 }
 
-.nav-button {
+.nav-button  {
     padding: 10px 20px;
     border-radius: 5px;
     width: 155px;
@@ -76,10 +76,13 @@ p {
 
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
+
 
 #all-books-header{
     text-align: center;
+    margin-bottom: 15px;
 }
 .book-card p{
     display: -webkit-box;
@@ -108,12 +111,83 @@ p {
     /* border:1px solid black; */
     width: 15%;
     height: 272px;
-    background-color: rgb(10, 32, 69);
+    background-color: rgba(10, 32, 69, 0.767);
     /* box-shadow: 2px 1px 1px 2px rgba(255, 255, 255, 0.25); */
     
 }
+
+@media only screen and (max-width: 700px) {
+    .book-card {
+    width: 30%;
+    }
+    
+}
+
 .book-card img {
     height: 200px;
-    width: 140px;
+    width: 100%;
     object-fit: cover;
-}   
+}  
+
+.formSection {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    height: 400px;
+    width: 300px;
+    justify-content: space-evenly;
+    background: rgba(118, 128, 146, 0.548);
+}
+
+.formSection button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 155px;
+    display: block;
+    margin: 0 auto;
+    
+}
+
+.formSection label {
+    text-align: center;
+}
+
+.formSection input {
+    width: 250px;
+    height: 20px;
+    display: block;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.726);
+    border: none;
+}
+
+#edit-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.bookDetails {
+    border: 2px solid white;
+    width: 500px;
+    height: 570px;
+    text-align: center;
+    background: rgba(10, 32, 69, 0.705);
+    padding: 10px;
+}
+
+#show-image {
+    width: 250px;
+    height: 320px;
+    display: block;
+    margin: 20px auto;
+}
+
+.bookDetails button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 100px; 
+}
+
+#details-header {
+    margin-bottom: 10px;
+}
