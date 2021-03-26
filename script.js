@@ -19,21 +19,27 @@ const loader = document.querySelector('.loader')
 const getData = async() =>{
     loader.classList.remove('hidden')
     try {
-    let response = await fetch('https://myapi-profstream.herokuapp.com/api/b9c89d/books')
-    let data = await response.json()
-    console.log(data)
-    bookList.innerHTML = ''
-    for (let i in data){
-        let bookTitle = data[i].title
-        let bookImage = data[i].image
-        let bookId = data[i].id
-        addNewBook(bookTitle,bookImage, bookId)
-    }
-    loader.classList.add('hidden')
+        let response = await fetch('https://myapi-profstream.herokuapp.com/api/b9c89d/books')
+        if (response.status === 200) {
+            let data = await response.json()
+            console.log(data)
+            bookList.innerHTML = ''
+            for (let i in data){
+                let bookTitle = data[i].title
+                let bookImage = data[i].image
+                let bookId = data[i].id
+                addNewBook(bookTitle,bookImage, bookId)
+            }
+            loader.classList.add('hidden')
+        }
+        else {
+            throw new Error('Server Error')
+        }
+       
         
     } catch (error) {
-        
-        
+        displayMessage(error.message)
+        loader.classList.add('hidden')
     }
     
 }
@@ -101,20 +107,34 @@ const createBook = async(body_params) => {
 
 const showBook = async (id) => {
     loader.classList.remove('hidden')
-    const res = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`)
-    const data = await res.json()
-    document.querySelector('#details-header').innerText = `Details for ${data.title}`
-    document.querySelector('#show-name').innerText = data.title
-    document.querySelector('#show-author').innerText = data.author
-    document.querySelector('#show-release-date').innerText = data.release_date
-    document.querySelector('#show-image').src = data.image
-    newBook.classList.remove('active')
-    allBooks.classList.remove('active')
-    bookDetailContainer.classList.remove('hidden')
-    deleteBookButton.setAttribute('data-id',id);
-    allBooksContainer.classList.add('hidden')
-    editSection.classList.add('hidden')
-    loader.classList.add('hidden')
+    try {
+        const res = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`)
+        if (res.status === 200) {
+            const data = await res.json()
+            document.querySelector('#details-header').innerText = `Details for ${data.title}`
+            document.querySelector('#show-name').innerText = data.title
+            document.querySelector('#show-author').innerText = data.author
+            document.querySelector('#show-release-date').innerText = data.release_date
+            document.querySelector('#show-image').src = data.image
+            newBook.classList.remove('active')
+            allBooks.classList.remove('active')
+            bookDetailContainer.classList.remove('hidden')
+            deleteBookButton.setAttribute('data-id',id);
+            allBooksContainer.classList.add('hidden')
+            editSection.classList.add('hidden')
+            loader.classList.add('hidden')
+        }
+        else {
+            throw new Error('Server Error')
+        }
+     
+    }
+    catch(error) {
+        displayMessage(error.message)
+        loader.classList.add('hidden')
+    }
+   
+    
 }
 
 const updateBook = async(id,body_params) => {
