@@ -83,7 +83,7 @@ const createBook = async(body_params) => {
         } 
     }
     catch(error) {
-        displayMessage(error);
+        displayMessage(error.message);
         return;
     }
 }
@@ -127,7 +127,7 @@ const updateBook = async(id,body_params) => {
         } 
     }
     catch(error) {
-        displayMessage(error);
+        displayMessage(error.message);
         return;
     }
 }
@@ -146,17 +146,37 @@ const deleteBook = async (bookId) => {
         }
     }
     catch(error) {
-        displayMessage(error);
+        displayMessage(error.message);
     }
    
      
 }
 
+// Check Validation of Form Return true if everything is in th field. False if not
+const checkValidation = submitArr => {
+    for (let i = 0; i < submitArr.length-1; i++) {
+        if (submitArr[i].value === '') return false;
+    }
+
+    return true;
+}
+
+// Check Validation for Edit Form
+const checkValidationEdit = submitArr => {
+    for (let i = 0; i < submitArr.length-1; i++) {
+        if (submitArr[i].value !== '') return true;
+    }
+
+    return false;
+}
+
+
+
 // Put this in Catch Area of Your Try/Catch.  Shows an error on screen if anything went wrong.
 const displayMessage = (error) => {
     document.getElementById('alert-message').innerHTML= "";
     const p = document.createElement('p');
-    p.innerText = error.message;
+    p.innerText = error
     document.getElementById('alert-message').append(p);
     document.getElementById('alert-message').classList.remove('hidden');
     
@@ -168,32 +188,47 @@ const displayMessage = (error) => {
 submitForm.addEventListener('submit', event =>{
     event.preventDefault()
     let submitArr = event.target.elements
-    const body = {}
-    for(let i = 0; i<submitArr.length-1; i++){
-        console.log(submitArr[i])
-        const key = submitArr[i].getAttribute('name')
-        console.log(submitArr[i].value)
-        body[key] = submitArr[i].value
+
+    if (checkValidation(submitArr)) {
+        const body = {}
+        for (let i = 0; i<submitArr.length-1; i++){
+            const key = submitArr[i].getAttribute('name')
+            body[key] = submitArr[i].value
+        }
+        
+        createBook(body)
     }
-    createBook(body)
+
+    else {
+        let message = ''
+        for (let i = 0; i < submitArr.length-1; i++) {
+            if (submitArr[i].value === '') message += `${submitArr[i].getAttribute('name')} is empty \n`
+        }
+        displayMessage(message)
+    }
+   
 })
 
 editForm.addEventListener('submit', event => {
     event.preventDefault()
     let updateArr = event.target.elements
-    const body = {}
-    for(let i = 0; i<updateArr.length-1; i++){
-  
-
-        if (updateArr[i].value !== "") {
-            const key = updateArr[i].getAttribute('name')
-            body[key] = updateArr[i].value
+    if (checkValidationEdit(updateArr)) {
+        const body = {}
+        for(let i = 0; i<updateArr.length-1; i++){
+            if (updateArr[i].value !== "") {
+                const key = updateArr[i].getAttribute('name')
+                body[key] = updateArr[i].value
+            }
         }
+    
+        const bookId = editForm.getAttribute('data-id')
+        updateBook(bookId, body)
     }
 
-    const bookId = editForm.getAttribute('data-id')
-    console.log(body)
-    updateBook(bookId, body)
+    else {
+        displayMessage('Everything is empty')
+    }
+   
 })
 
 allBooks.addEventListener('click', () =>{
