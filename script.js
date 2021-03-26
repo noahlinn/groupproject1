@@ -15,10 +15,10 @@ const editForm = document.querySelector('#edit-book-form')
 const loader = document.querySelector('.loader')
 
 
-
 //get request
 const getData = async() =>{
     loader.classList.remove('hidden')
+    try {
     let response = await fetch('https://myapi-profstream.herokuapp.com/api/b9c89d/books')
     let data = await response.json()
     console.log(data)
@@ -30,6 +30,12 @@ const getData = async() =>{
         addNewBook(bookTitle,bookImage, bookId)
     }
     loader.classList.add('hidden')
+        
+    } catch (error) {
+        
+        
+    }
+    
 }
 
 addNewBook = (title, image, id) => {
@@ -47,7 +53,7 @@ addNewBook = (title, image, id) => {
     bookList.append(card)
 
 
-    bookTitle.addEventListener('click',() =>{
+    card.addEventListener('click',() =>{
         showBook(id)
     })
 }
@@ -58,6 +64,7 @@ addNewBook = (title, image, id) => {
 
 
 const createBook = async(body_params) => {
+    loader.classList.remove('hidden')
     try {
         const resp = await fetch('https://myapi-profstream.herokuapp.com/api/b9c89d/books', 
             {
@@ -82,15 +89,18 @@ const createBook = async(body_params) => {
             createBookContainer.classList.add('hidden')
             submitForm.reset()
             getData()
+            loader.classList.add('hidden')
         } 
     }
     catch(error) {
+        loader.classList.add('hidden')
         displayMessage(error.message);
         return;
     }
 }
 
 const showBook = async (id) => {
+    loader.classList.remove('hidden')
     const res = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`)
     const data = await res.json()
     document.querySelector('#details-header').innerText = `Details for ${data.title}`
@@ -104,9 +114,11 @@ const showBook = async (id) => {
     deleteBookButton.setAttribute('data-id',id);
     allBooksContainer.classList.add('hidden')
     editSection.classList.add('hidden')
+    loader.classList.add('hidden')
 }
 
 const updateBook = async(id,body_params) => {
+    loader.classList.remove('hidden')
     try {
         const resp = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`, 
             {
@@ -126,15 +138,18 @@ const updateBook = async(id,body_params) => {
            showBook(id)
            getData()
            editForm.reset()
+           loader.classList.add('hidden')
         } 
     }
     catch(error) {
+        loader.classList.add('hidden')
         displayMessage(error.message);
         return;
     }
 }
 
 const deleteBook = async (bookId) => {
+    loader.classList.remove('hidden')
     try {
         const res = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${bookId}`, { method: 'DELETE' })
     
@@ -145,9 +160,11 @@ const deleteBook = async (bookId) => {
             getData();
             allBooksContainer.classList.remove('hidden');
             bookDetailContainer.classList.add('hidden');
+            loader.classList.add('hidden')
         }
     }
     catch(error) {
+        loader.classList.add('hidden')
         displayMessage(error.message);
     }
    

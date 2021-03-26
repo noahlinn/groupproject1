@@ -191,7 +191,7 @@ p {
 .loader {
     color: official;
     top:200px;
-    position: relative;
+    position: absolute;
     width: 80px;
     height: 80px;
   }
