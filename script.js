@@ -13,13 +13,13 @@ const editBookButton = document.getElementById('edit-book-button')
 const editSection = document.querySelector('#edit-section')
 const editForm = document.querySelector('#edit-book-form')
 const loader = document.querySelector('.loader')
-
+// https://myapi-profstream.herokuapp.com/api/b9c89d/books
 
 //get request
 const getData = async() =>{
     loader.classList.remove('hidden')
     try {
-        let response = await fetch('https://myapi-profstream.herokuapp.com/api/b9c89d/books')
+        let response = await fetch('http://localhost:3000/books/')  
         if (response.status === 200) {
             let data = await response.json()
             console.log(data)
@@ -72,7 +72,7 @@ addNewBook = (title, image, id) => {
 const createBook = async(body_params) => {
     loader.classList.remove('hidden')
     try {
-        const resp = await fetch('https://myapi-profstream.herokuapp.com/api/b9c89d/books', 
+        const resp = await fetch('http://localhost:3000/books/', 
             {
                 method: 'POST',
                 headers: {
@@ -80,17 +80,17 @@ const createBook = async(body_params) => {
                 },
                 body: JSON.stringify(body_params),
             });
+           
         if (resp.status === 400) {
             throw new Error('Something is missing in your Create a Book Form');
         }
         else if(resp.status === 401) {
             throw new Error('You can only have 10 records at a time with a free account. Please upgrade :)');
         }
-        else if (resp.status === 201) {
+        else if (resp.status === 201 || resp.status === 200) {
             // Have the dom show the new books
             // showBook(resp.json().id)
             const data = await resp.json()
-            console.log(data)
             showBook(data.id)
             createBookContainer.classList.add('hidden')
             submitForm.reset()
@@ -108,7 +108,7 @@ const createBook = async(body_params) => {
 const showBook = async (id) => {
     loader.classList.remove('hidden')
     try {
-        const res = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`)
+        const res = await fetch(`http://localhost:3000/books/${id}`)
         if (res.status === 200) {
             const data = await res.json()
             document.querySelector('#details-header').innerText = `Details for ${data.title}`
@@ -140,7 +140,7 @@ const showBook = async (id) => {
 const updateBook = async(id,body_params) => {
     loader.classList.remove('hidden')
     try {
-        const resp = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${id}`, 
+        const resp = await fetch(`http://localhost:3000/books/${id}`, 
             {
                 method: 'PUT',
                 headers: {
@@ -148,11 +148,12 @@ const updateBook = async(id,body_params) => {
                 },
                 body: JSON.stringify(body_params),
             });
+       
         if (resp.status === 404) {
             throw new Error('404 error');
         }
 
-        else if (resp.status === 201) {
+        else if (resp.status === 201 || resp.status === 200) {
 
             // What to do after a book is updated
            showBook(id)
@@ -171,7 +172,7 @@ const updateBook = async(id,body_params) => {
 const deleteBook = async (bookId) => {
     loader.classList.remove('hidden')
     try {
-        const res = await fetch(`https://myapi-profstream.herokuapp.com/api/b9c89d/books/${bookId}`, { method: 'DELETE' })
+        const res = await fetch(`http://localhost:3000/books/${bookId}`, { method: 'DELETE' })
     
         if (res.status === 404) {
             throw new Error('404 error');
